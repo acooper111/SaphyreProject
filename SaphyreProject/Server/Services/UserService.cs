@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SaphyreProject.Server.Models;
 using SaphyreProject.Shared.Models;
+using LogLevel = SaphyreProject.Shared.Models.LogLevel;
 
 namespace SaphyreProject.Server.Services;
 
@@ -10,101 +11,52 @@ public interface IUserService
     public List<User> GetUserDetails();
     public void AddUser(User user);
     public void UpdateUserDetails(User user);
-    public User GetUserData(Guid id);
+    public User GetUser(Guid id);
     public void DeleteUser(Guid id);
 }
 
 public class UserService : IUserService
 {
     
-    readonly UserRepository _dbContext = new();
+    private UserRepository userRepository = new();
+    private ILogService logService;
     
-    public UserService(UserRepository dbContext)
+    public UserService(UserRepository userRepository, ILogService logService)
     {
-        _dbContext = dbContext;
+        this.userRepository = userRepository;
+        this.logService = logService;
     }
-    //To Get all user details
+    
+    //Gets all User details present in DB
     public List<User> GetUserDetails()
     {
-        try
-        {
-            return _dbContext.Users.ToList();
-        }
-        catch
-        {
-            throw;
-        }
+        return userRepository.GetUserDetails();
     }
     
-    //To Add new user record
+    //Adds a new User to the DB
     public void AddUser(User user)
     {
-        try
-        {
-            _dbContext.Users.Add(user);
-            _dbContext.SaveChanges();
-        }
-        catch
-        {
-            throw;
-        }
+        userRepository.AddUser(user);
+        logService.SaveLog(LogLevel.Info, "Successfully created new User: " + user.Userid, "UserService.cs");
     }
     
-    //To Update the records of a particluar user
+    //Updates one User
     public void UpdateUserDetails(User user)
     {
-        Console.Out.Write("******************************" + user.Userid.ToString());
-        try
-        {
-            _dbContext.Entry(user).State = EntityState.Modified;
-            _dbContext.SaveChanges();
-        }
-        catch
-        {
-            throw;
-        }
+        userRepository.UpdateUserDetails(user);
+        logService.SaveLog(LogLevel.Info, "Successfully updated User: " + user.Userid, "UserService.cs");
     }
     
-    //Get the details of a particular user
-    public User GetUserData(Guid id)
+    //Gets a single User by Id
+    public User GetUser(Guid id)
     {
-        try
-        {
-            User? user = _dbContext.Users.Find(id);
-            if (user != null)
-            {
-                return user;
-            }
-            else
-            {
-                throw new ArgumentNullException();
-            }
-        }
-        catch
-        {
-            throw;
-        }
+        return userRepository.GetUser(id);
     }
     
-    //To Delete the record of a particular user
+    //Deletes a single User by Id
     public void DeleteUser(Guid id)
     {
-        try
-        {
-            User? user = _dbContext.Users.Find(id);
-            if (user != null)
-            {
-                _dbContext.Users.Remove(user);
-                _dbContext.SaveChanges();
-            }
-            else
-            {
-                throw new ArgumentNullException();
-            }
-        }
-        catch
-        {
-            throw;
-        }
+        userRepository.DeleteUser(id);
+        logService.SaveLog(LogLevel.Info, "Successfully deleted User: " + id, "UserService.cs");
     }
 }

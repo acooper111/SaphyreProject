@@ -38,10 +38,10 @@
     protected async Task RemoveUser(Guid userID)
     {
         await Http.DeleteAsync("api/User/" + userID);
-        NavigationManager.NavigateTo("/userdetails");
+        NavigationManager.NavigateTo("/");
     }
     void Cancel()
     {
-        NavigationManager.NavigateTo("/userdetails");
+        NavigationManager.NavigateTo("/");
     }
 }

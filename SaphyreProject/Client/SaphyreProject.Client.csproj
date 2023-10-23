@@ -20,4 +20,8 @@
         <ProjectReference Include="..\Shared\SaphyreProject.Shared.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Pages\" />
+    </ItemGroup>
+
 </Project>

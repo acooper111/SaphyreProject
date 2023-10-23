@@ -21,7 +21,7 @@ public class UserController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult Get(Guid id)
     {
-        User user = _iUserService.GetUserData(id);
+        User user = _iUserService.GetUser(id);
         if (user != null)
         {
             return Ok(user);

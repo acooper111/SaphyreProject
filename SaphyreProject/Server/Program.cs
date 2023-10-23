@@ -10,7 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<UserRepository>
 (options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-Console.Out.Write("*************************************** " + builder.Configuration.GetConnectionString("DefaultConnection"));
+builder.Services.AddDbContext<LogRepository>
+(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddTransient<ILogService, LogService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
