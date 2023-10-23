@@ -1,17 +1,22 @@
 using Microsoft.EntityFrameworkCore;
+using SaphyreProject.Server.Services;
 using SaphyreProject.Shared.Models;
+using LogLevel = SaphyreProject.Shared.Models.LogLevel;
 
 namespace SaphyreProject.Server.Models;
 
 
 public partial class UserRepository : DbContext
 {
-    public UserRepository()
+    private ILogService logService;
+    public UserRepository(ILogService logService)
     {
+        this.logService = logService;
     }
-    public UserRepository(DbContextOptions<UserRepository> options)
+    public UserRepository(DbContextOptions<UserRepository> options, ILogService logService)
         : base(options)
     {
+        this.logService = logService;
     }
     public virtual DbSet<User> Users { get; set; } = null!;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,6 +46,7 @@ public partial class UserRepository : DbContext
         }
         catch
         {
+            logService.SaveLog(LogLevel.Error, "Error getting User details", "UserRepository.cs");
             throw;
         }
     }
@@ -54,6 +60,7 @@ public partial class UserRepository : DbContext
         }
         catch
         {
+            logService.SaveLog(LogLevel.Error, "Error adding User", "UserRepository.cs");
             throw;
         }
     }
@@ -67,6 +74,7 @@ public partial class UserRepository : DbContext
         }
         catch
         {
+            logService.SaveLog(LogLevel.Error, "Error updating User detail", "UserRepository.cs");
             throw;
         }
     }
@@ -82,11 +90,13 @@ public partial class UserRepository : DbContext
             }
             else
             {
+                logService.SaveLog(LogLevel.Error, "Could not find User in DB", "UserRepository.cs");
                 throw new ArgumentNullException();
             }
         }
         catch
         {
+            logService.SaveLog(LogLevel.Error, "Error getting User detail", "UserRepository.cs");
             throw;
         }
     }
@@ -103,11 +113,13 @@ public partial class UserRepository : DbContext
             }
             else
             {
+                logService.SaveLog(LogLevel.Error, "Could not find User in DB for deletion", "UserRepository.cs");
                 throw new ArgumentNullException();
             }
         }
         catch
         {
+            logService.SaveLog(LogLevel.Error, "Error getting User details for deletion", "UserRepository.cs");
             throw;
         }
     }

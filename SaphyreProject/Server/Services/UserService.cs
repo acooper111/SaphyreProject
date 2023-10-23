@@ -18,7 +18,7 @@ public interface IUserService
 public class UserService : IUserService
 {
     
-    private UserRepository userRepository = new();
+    private UserRepository userRepository;
     private ILogService logService;
     
     public UserService(UserRepository userRepository, ILogService logService)

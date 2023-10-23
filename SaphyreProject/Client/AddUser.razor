@@ -10,21 +10,21 @@
     <div class="mb-3">
         <label for="Username" class="form-label">Username</label>
         <div class="col-md-4">
-            <InputText class="form-control" @bind-Value="user.Username" />
+            <InputText class="form-control" @bind-Value="user.Username"  id="Username"/>
         </div>
         <ValidationMessage For="@(() => user.Username)" />
     </div>
     <div class="mb-3">
         <label for="Name" class="form-label">Name</label>
         <div class="col-md-4">
-            <InputText class="form-control" @bind-Value="user.Name" />
+            <InputText class="form-control" @bind-Value="user.Name" id="Name"/>
         </div>
         <ValidationMessage For="@(() => user.Name)" />
     </div>
     <div class="mb-3">
         <label for="Email" class="form-label">E-mail</label>
         <div class="col-md-4">
-            <InputText class="form-control" @bind-Value="user.Email" />
+            <InputText class="form-control" @bind-Value="user.Email" id="Email"/>
         </div>
         <ValidationMessage For="@(() => user.Email)" />
     </div>
