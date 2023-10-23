@@ -37,14 +37,14 @@ public class UserService : IUserService
     public void AddUser(User user)
     {
         userRepository.AddUser(user);
-        logService.SaveLog(LogLevel.Info, "Successfully created new User: " + user.Userid, "UserService.cs");
+        logService.Info("Successfully created new User: " + user.Userid, "UserService.cs");
     }
     
     //Updates one User
     public void UpdateUserDetails(User user)
     {
         userRepository.UpdateUserDetails(user);
-        logService.SaveLog(LogLevel.Info, "Successfully updated User: " + user.Userid, "UserService.cs");
+        logService.Info("Successfully updated User: " + user.Userid, "UserService.cs");
     }
     
     //Gets a single User by Id
@@ -57,6 +57,6 @@ public class UserService : IUserService
     public void DeleteUser(Guid id)
     {
         userRepository.DeleteUser(id);
-        logService.SaveLog(LogLevel.Info, "Successfully deleted User: " + id, "UserService.cs");
+        logService.Info("Successfully deleted User: " + id, "UserService.cs");
     }
 }

@@ -6,7 +6,9 @@ namespace SaphyreProject.Server.Services;
 
 public interface ILogService
 {
-    public void SaveLog(LogLevel level, string message, string source);
+    public void Error(string message, string source);
+    public void Warning(string message, string source);
+    public void Info(string message, string source);
 }
 
 public class LogService : ILogService
@@ -16,9 +18,21 @@ public class LogService : ILogService
     {
         this.logRepository = logRepository;
     }
-    public void SaveLog(LogLevel level, string message, string source)
+    public void Error(string message, string source)
     {
-        var log = CreateLog(level, message, source);
+        var log = CreateLog(LogLevel.Error, message, source);
+        logRepository.SaveLog(log);
+    }
+    
+    public void Warning(string message, string source)
+    {
+        var log = CreateLog(LogLevel.Warning, message, source);
+        logRepository.SaveLog(log);
+    }
+    
+    public void Info( string message, string source)
+    {
+        var log = CreateLog(LogLevel.Info, message, source);
         logRepository.SaveLog(log);
     }
 

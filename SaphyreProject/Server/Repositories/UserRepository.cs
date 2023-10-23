@@ -5,8 +5,12 @@ using LogLevel = SaphyreProject.Shared.Models.LogLevel;
 
 namespace SaphyreProject.Server.Models;
 
+public interface IUserRepository
+{
+    public List<User> GetUserDetails();
+}
 
-public partial class UserRepository : DbContext
+public partial class UserRepository : DbContext, IUserRepository
 {
     private ILogService logService;
     public UserRepository(ILogService logService)
@@ -46,7 +50,7 @@ public partial class UserRepository : DbContext
         }
         catch
         {
-            logService.SaveLog(LogLevel.Error, "Error getting User details", "UserRepository.cs");
+            logService.Error("Error getting User details", "UserRepository.cs");
             throw;
         }
     }
@@ -60,7 +64,7 @@ public partial class UserRepository : DbContext
         }
         catch
         {
-            logService.SaveLog(LogLevel.Error, "Error adding User", "UserRepository.cs");
+            logService.Error("Error adding User", "UserRepository.cs");
             throw;
         }
     }
@@ -74,7 +78,7 @@ public partial class UserRepository : DbContext
         }
         catch
         {
-            logService.SaveLog(LogLevel.Error, "Error updating User detail", "UserRepository.cs");
+            logService.Error("Error updating User detail", "UserRepository.cs");
             throw;
         }
     }
@@ -90,13 +94,13 @@ public partial class UserRepository : DbContext
             }
             else
             {
-                logService.SaveLog(LogLevel.Error, "Could not find User in DB", "UserRepository.cs");
+                logService.Error("Could not find User in DB", "UserRepository.cs");
                 throw new ArgumentNullException();
             }
         }
         catch
         {
-            logService.SaveLog(LogLevel.Error, "Error getting User detail", "UserRepository.cs");
+            logService.Error("Error getting User detail", "UserRepository.cs");
             throw;
         }
     }
@@ -113,13 +117,13 @@ public partial class UserRepository : DbContext
             }
             else
             {
-                logService.SaveLog(LogLevel.Error, "Could not find User in DB for deletion", "UserRepository.cs");
+                logService.Error("Could not find User in DB for deletion", "UserRepository.cs");
                 throw new ArgumentNullException();
             }
         }
         catch
         {
-            logService.SaveLog(LogLevel.Error, "Error getting User details for deletion", "UserRepository.cs");
+            logService.Error("Error getting User details for deletion", "UserRepository.cs");
             throw;
         }
     }
