@@ -13,3 +13,13 @@ The UserRepository allows the app to interact with the DB. This is where the Cre
 Because my app seemed a little simple I also implemented a custom logger with model, service and repository classes.
 In the model I added an enum to make tracking LogLevel a little easier.
 In the service we have different methods depending on the level of log we want to create and they then call the repo method to store the log in the DB
+
+Ideas for future development:
+
+-Add unit tests
+
+-add better input validation eg make sure email is valid, make sure username is not taken
+
+-add pagination for main screen if number of users in DB is too large for one screen
+
+-think of some business logic for the service layer
