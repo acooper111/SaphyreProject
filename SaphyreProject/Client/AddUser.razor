@@ -1,0 +1,67 @@
+@page "/user/add"
+@page "/user/edit/{userId:guid}"
+@using SaphyreProject.Shared.Models
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+<h1>@Title User</h1>
+<hr />
+<EditForm Model="@user" OnValidSubmit="SaveUser">
+    <DataAnnotationsValidator />
+    <div class="mb-3">
+        <label for="Username" class="form-label">Username</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="user.Username" />
+        </div>
+        <ValidationMessage For="@(() => user.Username)" />
+    </div>
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="user.Name" />
+        </div>
+        <ValidationMessage For="@(() => user.Name)" />
+    </div>
+    <div class="mb-3">
+        <label for="Email" class="form-label">E-mail</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="user.Email" />
+        </div>
+        <ValidationMessage For="@(() => user.Email)" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn btn-light" @onclick="Cancel">Cancel</button>
+    </div>
+</EditForm>
+@code {
+    [Parameter]
+    public Guid userId { get; set; }
+    protected string Title = "Add";
+    protected User user = new();
+    bool isEdit = false;
+    protected override async Task OnParametersSetAsync()
+    {
+        if (userId != Guid.Empty)
+        {
+            Title = "Edit";
+            user = await Http.GetFromJsonAsync<User>("api/User/" + userId);
+            isEdit = true;
+        }
+    }
+    protected async Task SaveUser()
+    {
+        if (isEdit && user.Userid != Guid.Empty)
+        {
+            await Http.PutAsJsonAsync("api/User", user);
+        }
+        else
+        {
+            await Http.PostAsJsonAsync("api/User", user);
+        }
+        Cancel();
+    }
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo("/userdetails");
+    }
+}

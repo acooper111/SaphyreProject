@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaphyreProject.Server", "SaphyreProject\Server\SaphyreProject.Server.csproj", "{BEC86A93-17CC-4FE0-A394-A99BA1B6B9EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaphyreProject.Client", "SaphyreProject\Client\SaphyreProject.Client.csproj", "{7693847A-637A-4271-8F2A-5C3EC96F8F0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaphyreProject.Shared", "SaphyreProject\Shared\SaphyreProject.Shared.csproj", "{451F768F-717D-4130-9E4F-36E20AE021F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEC86A93-17CC-4FE0-A394-A99BA1B6B9EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEC86A93-17CC-4FE0-A394-A99BA1B6B9EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEC86A93-17CC-4FE0-A394-A99BA1B6B9EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEC86A93-17CC-4FE0-A394-A99BA1B6B9EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7693847A-637A-4271-8F2A-5C3EC96F8F0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7693847A-637A-4271-8F2A-5C3EC96F8F0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7693847A-637A-4271-8F2A-5C3EC96F8F0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7693847A-637A-4271-8F2A-5C3EC96F8F0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{451F768F-717D-4130-9E4F-36E20AE021F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{451F768F-717D-4130-9E4F-36E20AE021F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{451F768F-717D-4130-9E4F-36E20AE021F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{451F768F-717D-4130-9E4F-36E20AE021F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
